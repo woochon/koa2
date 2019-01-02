@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学员信息首页</title>
+    <link rel="stylesheet" type="text/css" href="/base.css"></link>
+</head>
+<body>
+<button onclick="getJson()">获取json数据</button>
+<a href="/add">添加学员</a>
+<ul>
+    <li>
+        <div>姓名</div>
+        <div>年龄</div>
+        <div>操作</div>
+    </li>
+    {% for item in msgList %}
+    <li>
+        <div>{{item.name}}</div>
+        <div>{{item.age}}</div>
+        <div><a href="/editor?id={{item._id}}">编辑</a> <a href="/remove?id={{item._id}}">删除</a></div>
+    </li>
+    {% else %}
+    <li>暂无学员信息</li>
+    {% endfor %}
+</ul>
+</body>
+<script>
+
+        getJson=function(){
+            alert('1234');
+            var xmlhttp;
+
+            if (window.XMLHttpRequest)
+            {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp=new XMLHttpRequest();
+            }
+            else
+            {// code for IE6, IE5
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange=function() {
+                if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                {
+                    console.log(xmlhttp.response);
+                }
+
+            };
+            xmlhttp.open("GET","http://localhost:3000/json",true);
+            xmlhttp.send();
+        }
+
+
+</script>
+</html>

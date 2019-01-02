@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加学员信息</title>
+    <link rel="stylesheet" type="text/css" href="/base.css"></link>
+</head>
+<body>
+
+<form action="http://localhost:3000/doAdd" method="post">
+    <input type="hidden" name="userId">
+    <div>
+        <span>姓名：</span><input type="text" name="name">
+    </div>
+    <div>
+        <span>年龄：</span><input type="number" min="1" max="100" name="age">
+    </div>
+    <input type="submit" value="提交">
+</form>
+</body>
+</html>
