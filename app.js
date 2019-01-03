@@ -4,12 +4,17 @@ const bodyParser = require('koa-bodyparser');
 const nunjucks = require('koa-nunjucks-2');
 const staticFiles = require('koa-static');
 const DB =require('./mongoDB/index');
+const jsonp = require('koa-jsonp');
+const cors =require('koa2-cors');
 
 const app = new Koa();
+
 app.use(async (ctx, next) => {
     ctx.state.DB=DB;
     await next();
 });
+app.use(jsonp());
+app.use(cors());
 
 const router = require('./router');
 const middleware = require('./middleware');
