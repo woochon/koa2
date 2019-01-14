@@ -1,5 +1,10 @@
 /*const userService = require('../service/user');*/
 /*const DB =require('../mongoDB/index');*/
+/*
+* 引入svgCaptcha
+* */
+const DB =require('../mongoDB/index');
+const svgCaptcha = require('svg-captcha');
 module.exports={
     index:async (ctx,next)=>{
         // console.log(ctx);
@@ -62,6 +67,37 @@ module.exports={
     },
     json:async (ctx,next)=>{
         ctx.send({"name":"zhansgan","age":40});
+    },
+    login:async (ctx,next)=>{
+        console.log(ctx.request.body);
+        const params = ctx.request.body;
+        const email=params.userName;
+        const password = params.password;
+        console.log(email);
+        console.log(password);
+        const res=await DB.find('admin',{"email":email,"password":password});
+        if(res.length>0){
+            ctx.body={"code":0,"message":"登录成功"};
+        }else{
+            ctx.body={"code":1,"message":"账号或密码错误"};
+        }
+    },
+    getIdentityCode:async (ctx,next)=>{
+        let captcha = svgCaptcha.create({
+            size:4,
+            fontSize:24,
+            width:100,
+            height:24,
+            background:'#cc9966'
+        });
+        ctx.response.type='image/svg+xml';
+        console.log(captcha.text);
+
+        ctx.body = captcha.data;
+        /*ctx.body = captcha.data*/
+        /*ctx.body = {
+            "code":0,"data":captcha.text
+        }*/
     }
 
 };

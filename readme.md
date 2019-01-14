@@ -20,6 +20,11 @@ db.collectionName.insert({
     "pid":"0",
     "add_time":123456789
 })
+db.admin.insert({
+    "email":"woochon@163.com",
+    "password":"123456",
+    "state":1
+})
 db.article.insert({
     "title":"filder",
     "description":"使用filder来抓取请求",
@@ -56,3 +61,18 @@ console.log(data[j].pid);
 console.log(typeof(data[j].pid));
 console.log(data[1].pid===firstCategory[j]._id)
 ```
+
+### 记录上次页面的位置
+- ctx.request.header['referer']
+### momgo数据库导入和导出
+- 导入 mongodump -h 127.0.0.1 -d woochon -o F:\copyData
+- 导出 mongorestore -h 127.0.0.1 -d koaDemo  F:\copyData\woochon
+
+## 验证码制作
+- npm install svg-captcha --save
+- 引入const svgCaptcha = require('svg-captcha');
+- 配置
+```
+
+```
+

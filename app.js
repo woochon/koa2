@@ -17,6 +17,7 @@ app.use(jsonp());
 app.use(cors());
 
 const router = require('./router');
+/*const router = require('./routers/index');*/
 const middleware = require('./middleware');
 middleware(app);
 
