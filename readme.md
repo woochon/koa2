@@ -64,7 +64,7 @@ console.log(data[1].pid===firstCategory[j]._id)
 
 ### 记录上次页面的位置
 - ctx.request.header['referer']
-### momgo数据库导入和导出
+### mongo数据库导入和导出
 - 导入 mongodump -h 127.0.0.1 -d woochon -o F:\copyData
 - 导出 mongorestore -h 127.0.0.1 -d koaDemo  F:\copyData\woochon
 
@@ -73,6 +73,23 @@ console.log(data[1].pid===firstCategory[j]._id)
 - 引入const svgCaptcha = require('svg-captcha');
 - 配置
 ```
+let captcha = svgCaptcha.create({
+    size:4,
+    fontSize:24,
+    width:100,
+    height:24,
+    background:'#cc9966'
+});
+```
 
+## userInfo表的设计
+Object(_id)  name  email  avatar  userId
+```
+db.userInfo.insert({
+    "name":"wucheng",
+    "email":"woochon@163.com",
+    "avatar":"/avatar",
+    "userId":"5c3d85e7424fc5c02e512912",
+})
 ```
 

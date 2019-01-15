@@ -15,6 +15,7 @@ module.exports = (app)=>{
 
     router.post('/login',userController.login);
     router.get('/getIdentityCode',userController.getIdentityCode);
+    router.post('/getUserInfo',userController.userInfo);
 
     router.post('/getCategoryList',articleController.getCategoryList);
     router.post('/addCategory',articleController.addCategory);

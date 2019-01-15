@@ -68,19 +68,22 @@ module.exports={
     json:async (ctx,next)=>{
         ctx.send({"name":"zhansgan","age":40});
     },
+
+
     login:async (ctx,next)=>{
-        console.log(ctx.request.body);
         const params = ctx.request.body;
         const email=params.userName;
         const password = params.password;
-        console.log(email);
-        console.log(password);
         const res=await DB.find('admin',{"email":email,"password":password});
         if(res.length>0){
-            ctx.body={"code":0,"message":"登录成功"};
+            ctx.body={"code":0,"message":"登录成功","data":{"_id":res._id}};
         }else{
             ctx.body={"code":1,"message":"账号或密码错误"};
         }
+    },
+    userInfo:async (ctx)=>{
+        console.log(ctx.body);
+
     },
     getIdentityCode:async (ctx,next)=>{
         let captcha = svgCaptcha.create({
@@ -90,14 +93,11 @@ module.exports={
             height:24,
             background:'#cc9966'
         });
-        ctx.response.type='image/svg+xml';
-        console.log(captcha.text);
-
-        ctx.body = captcha.data;
+        /*ctx.response.type='image/svg+xml';*/
         /*ctx.body = captcha.data*/
-        /*ctx.body = {
-            "code":0,"data":captcha.text
-        }*/
+        ctx.body = {
+            "code":0,"data":captcha.data,"text":captcha.text
+        }
     }
 
 };
