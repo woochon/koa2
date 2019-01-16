@@ -7,6 +7,7 @@ const DB =require('./mongoDB/index');
 const jsonp = require('koa-jsonp');
 const cors =require('koa2-cors');
 const session = require('koa-session');
+
 const app = new Koa();
 
 app.keys = ['some secret hurr'];
@@ -20,6 +21,7 @@ const CONFIG = {
     renew: false,  //(boolean) renew session when session is nearly expired,
 };
 app.use(session(CONFIG, app));
+
 
 app.use(async (ctx, next) => {
     ctx.state.DB=DB;

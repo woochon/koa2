@@ -5,6 +5,10 @@
 * */
 const DB =require('../mongoDB/index');
 const svgCaptcha = require('svg-captcha');
+const path = require('path');
+
+const multiparty = require("multiparty");
+
 module.exports={
     index:async (ctx,next)=>{
         // console.log(ctx);
@@ -98,6 +102,27 @@ module.exports={
         ctx.body = {
             "code":0,"data":captcha.data,"text":captcha.text
         }
+    },
+    uploadAvatar:async(ctx)=>{
+        let form = new multiparty.Form({uploadDir:path.resolve(__dirname, "../images/avatar") });
+        console.log('uploadAvatar');
+        console.log(ctx.req);
+        // console.log(ctx.request);
+        // console.log(ctx.request.body.userId);
+        //ctx.body={'code':0,'message':'上传出错'}
+        async function loadimg() {
+            console.log('=======');
+            await form.parse(ctx.req,function(err,fields,files){
+                console.log(err);
+                if(err){throw err; return;}
+                console.log(fields);//除文件外的其他附带信息
+                console.log(files);//文件信息
+                return ;
+            });
+        }
+        await loadimg().then(()=>{
+            ctx.body="上传成功";
+        });
     }
 
 };
